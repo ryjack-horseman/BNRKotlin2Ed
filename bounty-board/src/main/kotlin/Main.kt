@@ -1,8 +1,10 @@
 const val HERO_NAME = "Madrigal"
+
 fun main() {
     println("The hero announces her presence to the world")
     println(HERO_NAME)
 
+    var hasSteed = false
     var playerLevel= 4
     println(playerLevel)
 
