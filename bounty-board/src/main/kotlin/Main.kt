@@ -25,7 +25,7 @@ fun main() {
     } else if (playerLevel == 8) {
         println("Defeat Nogartse, bringer of death and eater of worlds")
     } else {
-        println("Locate the enchanted sword.")
+        println("There are no quests right now")
     }
 
     println("Time passes...")
