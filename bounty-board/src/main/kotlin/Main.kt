@@ -16,8 +16,16 @@ fun main() {
 
     if(playerLevel == 1){
         println("Meet Mr. Bubbles in the land of soft things")
+    } else if (playerLevel <= 5){
+        println("Save the town from the barbarian invasions.")
+    } else if (playerLevel == 6) {
+        println("Located the enchanted sword.")
+    } else if (playerLevel == 7) {
+        println("Recover the long-lost artifact of creation")
+    } else if (playerLevel == 8) {
+        println("Defeat Nogartse, bringer of death and eater of worlds")
     } else {
-      println("Locate the enchanted sword.")
+        println("Locate the enchanted sword.")
     }
 
     println("Time passes...")
