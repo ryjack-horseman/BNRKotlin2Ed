@@ -18,23 +18,7 @@ fun main() {
 
     println(playerLevel)
 
-    val quest: String = when(playerLevel){
-        1 -> "Meet Mr. Bubbles in the land of soft things"
-        in 2..5 -> {
-        //try diplomacy
-        val canTalktoBarbarians = !hasAngeredBarbarians &&
-                (hasBefriendedBarbarians || playerClass == "barbarian")
-        if (canTalktoBarbarians) {
-            "Convince the barbarians to call off their invasion."
-        } else {
-            "Save the town from the barbarian invasions."
-        }
-         }
-        6 -> "Located the enchanted sword."
-        7 -> "Recover the long-lost artifact of creation"
-        8 -> "Defeat Nogartse, bringer of death and eater of worlds"
-        else -> "There are no quests right now"
-    }
+    val quest: String = obtainQuest(playerLevel, hasAngeredBarbarians, hasBefriendedBarbarians, playerClass)
 
     println("The hero approaches the bouty board. It reads:")
     println(quest)
@@ -47,4 +31,31 @@ fun main() {
 //  ch2 magic mirror challenge
 //    println("The hero discovers a magic mirror!")
 //    println("The hero's new name is " + HERO_NAME.reversed())
+}
+
+private fun obtainQuest(
+    playerLevel: Int,
+    hasAngeredBarbarians: Boolean,
+    hasBefriendedBarbarians: Boolean,
+    playerClass: String
+): String {
+    val quest: String = when (playerLevel) {
+        1 -> "Meet Mr. Bubbles in the land of soft things"
+        in 2..5 -> {
+            //try diplomacy
+            val canTalktoBarbarians = !hasAngeredBarbarians &&
+                    (hasBefriendedBarbarians || playerClass == "barbarian")
+            if (canTalktoBarbarians) {
+                "Convince the barbarians to call off their invasion."
+            } else {
+                "Save the town from the barbarian invasions."
+            }
+        }
+
+        6 -> "Located the enchanted sword."
+        7 -> "Recover the long-lost artifact of creation"
+        8 -> "Defeat Nogartse, bringer of death and eater of worlds"
+        else -> "There are no quests right now"
+    }
+    return quest
 }
