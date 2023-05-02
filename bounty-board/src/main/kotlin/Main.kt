@@ -1,4 +1,5 @@
 const val HERO_NAME = "Madrigal"
+var playerLevel = 5
 
 fun main() {
     println("The hero announces her presence to the world")
@@ -11,23 +12,15 @@ fun main() {
 //    var currentPublican = "John"
 //    var currGold = 50
 //    val drinkList: List<String> = listOf("mead", "wine", "LaCroix")
-    var playerLevel= 4
-    val hasBefriendedBarbarians = true
-    val hasAngeredBarbarians = false
-    val playerClass = "paladin"
-
-    println(playerLevel)
-
-    val quest: String = obtainQuest(playerLevel, hasAngeredBarbarians, hasBefriendedBarbarians, playerClass)
-
-    println("The hero approaches the bouty board. It reads:")
-    println(quest)
+    readBountyBoard()
 
     println("Time passes...")
     println("The hero returns from her quest.")
 
     playerLevel++
     println(playerLevel)
+
+    readBountyBoard()
 //  ch2 magic mirror challenge
 //    println("The hero discovers a magic mirror!")
 //    println("The hero's new name is " + HERO_NAME.reversed())
@@ -35,9 +28,9 @@ fun main() {
 
 private fun obtainQuest(
     playerLevel: Int,
-    hasAngeredBarbarians: Boolean,
-    hasBefriendedBarbarians: Boolean,
-    playerClass: String
+    playerClass: String = "paladin",
+    hasBefriendedBarbarians: Boolean = true,
+    hasAngeredBarbarians: Boolean = false
 ): String {
     val quest: String = when (playerLevel) {
         1 -> "Meet Mr. Bubbles in the land of soft things"
@@ -58,4 +51,9 @@ private fun obtainQuest(
         else -> "There are no quests right now"
     }
     return quest
+}
+
+private fun readBountyBoard(){
+    println("The hero approaches the bounty board. It reads:")
+    println(obtainQuest(playerLevel))
 }
