@@ -12,12 +12,23 @@ fun main() {
 //    var currGold = 50
 //    val drinkList: List<String> = listOf("mead", "wine", "LaCroix")
     var playerLevel= 4
+    val hasBefriendedBarbarians = true
+    val hasAngeredBarbarians = false
+    val playerClass = "paladin"
+
     println(playerLevel)
 
     if(playerLevel == 1){
         println("Meet Mr. Bubbles in the land of soft things")
     } else if (playerLevel <= 5){
-        println("Save the town from the barbarian invasions.")
+        //try diplomacy
+        val canTalktoBarbarians = !hasAngeredBarbarians &&
+                (hasBefriendedBarbarians || playerClass=="barbarian")
+        if(canTalktoBarbarians) {
+            println("Convince the barbarians to call off their invasion.")
+        }else {
+            println("Save the town from the barbarian invasions.")
+        }
     } else if (playerLevel == 6) {
         println("Located the enchanted sword.")
     } else if (playerLevel == 7) {
