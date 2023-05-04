@@ -1,3 +1,5 @@
+import java.lang.IllegalArgumentException
+
 const val HERO_NAME = "Madrigal"
 var playerLevel = 0
 
@@ -34,7 +36,11 @@ private fun obtainQuest(
     playerClass: String = "paladin",
     hasBefriendedBarbarians: Boolean = true,
     hasAngeredBarbarians: Boolean = false
-): String? = when(playerLevel) {
+): String? {
+    if(playerLevel <= 0){
+        throw InvalidPlayerLevelException()
+    }
+    return when(playerLevel) {
         1 -> "Meet Mr. Bubbles in the land of soft things"
         in 2..5 -> {
             //try diplomacy
@@ -52,16 +58,24 @@ private fun obtainQuest(
         8 -> "Defeat Nogartse, bringer of death and eater of worlds"
         else -> null
     }
+}
+
+class InvalidPlayerLevelException() :
+    IllegalArgumentException("Invalid player level (must be at least 1)")
 
 private fun readBountyBoard(){
-    val quest: String? = obtainQuest(playerLevel)
-    val message: String = quest?.replace("Nogartse", "xxxxxxxx")
-        ?.let { censoredQuest ->
-            """
+    val message: String = try{
+        val quest: String? = obtainQuest(playerLevel)
+        quest?.replace("Nogartse", "xxxxxxxx")
+            ?.let { censoredQuest ->
+                """
             |$HERO_NAME approaches the bounty board. It reads:
             |   "$quest"
             """.trimMargin()
-        } ?: "$HERO_NAME approaches the bountry board, but it is blank"
-    println(message)
+            } ?: "$HERO_NAME approaches the bounty board, but it is blank"
+    }catch (e: Exception){
+        "$HERO_NAME can't read what's on the bounty board"
+    }
+    print(message)
 }
 // |   "${obtainQuest(playerLevel).replace("Nogartse", "xxxxxxxx")}"
