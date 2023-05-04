@@ -1,9 +1,16 @@
 const val HERO_NAME = "Madrigal"
-var playerLevel = 5
+var playerLevel = 0
 
 fun main() {
     println("$HERO_NAME announces her presence to the world")
-    println(playerLevel)
+    println("What level is $HERO_NAME?")
+    val playerLevelInput = readLine()!!
+    playerLevel = if(playerLevelInput.matches("""\d+""".toRegex())){
+        playerLevelInput.toInt()
+    }else{
+        1
+    }
+    println("$HERO_NAME's level is $playerLevel")
 
   //Ch2 hasSteed challenge
 //    var hasSteed = false
@@ -51,6 +58,10 @@ private fun obtainQuest(
     }
 
 private fun readBountyBoard(){
-    println("$HERO_NAME approaches the bounty board. It reads:")
-    println("\t\"${obtainQuest(playerLevel)}\"")
+    println(
+        """
+        |$HERO_NAME approaches the bounty board. It reads:
+        |   "${obtainQuest(playerLevel).replace("Nogartse", "xxxxxxxx")}"
+        """.trimMargin()
+    )
 }
