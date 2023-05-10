@@ -1,9 +1,6 @@
 var heroName: String = ""
 fun main() {
-
-
-    val heroName = promptHeroName()
-
+    heroName = promptHeroName()
 
     //changeNarratorMood()
     narrate("$heroName, ${createTitle(heroName)} heads to the town square.")
