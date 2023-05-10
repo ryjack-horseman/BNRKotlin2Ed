@@ -1,5 +1,9 @@
+import java.io.File
+
 private const val TAVERN_MASTER = "Taernyl"
 private const val TAVERN_NAME = "$TAVERN_MASTER's Folly"
+
+private val menuData = File("data/tavern-menu-data.txt").readText().split("\n")
 
 fun visitTavern() {
     narrate("$heroName enters $TAVERN_NAME")
@@ -23,6 +27,11 @@ fun visitTavern() {
     patrons.forEachIndexed { index, patron ->
         println("Good evening, $patron - you're #${index+1} in line")
         placeOrder(patron, "Dragon's Breath")
+    }
+
+    menuData.forEachIndexed {
+        index, data ->
+        println("$index : $data")
     }
 }
 
