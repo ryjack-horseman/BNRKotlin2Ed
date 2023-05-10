@@ -4,7 +4,7 @@ import kotlin.random.nextInt
 
 var narrationModifier: (String) -> String = {it}
 
-fun narrate(
+inline fun narrate(
     message: String,
     modifier: (String) -> String = {narrationModifier(it)}
 ) {
@@ -15,7 +15,7 @@ fun narrate(
 fun changeNarratorMood() {
     val mood: String
     val modifer: (String) -> String
-    when(Random.nextInt(1..4)){
+    when(Random.nextInt(1..5)){
         1 -> {
             mood = "loud"
             modifer = {message ->
@@ -33,6 +33,14 @@ fun changeNarratorMood() {
             mood = "unsure"
             modifer = {message ->
                 "$message."
+            }
+        }
+        4 -> {
+            var narrationsGiven = 0
+            mood = "like sending an itemized bill"
+            modifer = {message ->
+                narrationsGiven++
+                "$message.\n(I have narrated $narrationsGiven things)"
             }
         }
         else -> {
