@@ -20,15 +20,7 @@ fun visitTavern() {
     }
     println(othersMessage)
 
-    narrate("Eli leaves the tavern")
-    patrons.remove("Eli")
-    narrate("Alex enters the tavern")
-    patrons.add("Alex")
-
-    println(patrons)
-
-    narrate("Alex (VIP) enters the tavern")
-    patrons.add(0, "Alex")
-    patrons[0] = "Alexis"
-    println(patrons)
+   for(patron in patrons){
+       println("Good evening, $patron")
+   }
 }
