@@ -20,7 +20,7 @@ fun visitTavern() {
     }
     println(othersMessage)
 
-   for(patron in patrons){
-       println("Good evening, $patron")
-   }
+    patrons.forEachIndexed { index, patron ->
+        println("Good evening, $patron - you're #${index+1} in line")
+    }
 }
