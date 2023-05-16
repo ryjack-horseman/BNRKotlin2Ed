@@ -13,15 +13,15 @@ private val menuItems = menuData.map{ menuEntry ->
     name
 }
 
-private val menuItemPrices = menuData.map{ menuEntry ->
+private val menuItemPrices = menuData.associate { menuEntry ->
     val (_, name, price) = menuEntry.split(",")
     name to price.toDouble()
-}.toMap()
+}
 
-private val menuItemTypes = menuData.map{ menuEntry ->
+private val menuItemTypes = menuData.associate { menuEntry ->
     val (type, name, _) = menuEntry.split(",")
     name to type
-}.toMap()
+}
 
 fun visitTavern() {
     narrate("$heroName enters $TAVERN_NAME")
