@@ -1,4 +1,6 @@
 import java.io.File
+import kotlin.random.Random
+import kotlin.random.nextInt
 
 private const val TAVERN_MASTER = "Taernyl"
 private const val TAVERN_NAME = "$TAVERN_MASTER's Folly"
@@ -6,20 +8,17 @@ private const val TAVERN_NAME = "$TAVERN_MASTER's Folly"
 private val firstNames = setOf<String>("Alex", "Mordoc", "Sophie", "Tariq")
 private val lastNames = setOf<String>("Ironfoot", "Fernsworth", "Baggins", "Downstrider")
 
-private val menuData = File("data/tavern-menu-data.txt").readText().split("\n")
+private val menuData = File("data/tavern-menu-data.txt").readText().split("\n").map { it.split(",")}
 
-private val menuItems = menuData.map{ menuEntry ->
-    val (_, name, _) = menuEntry.split(",")
+private val menuItems = menuData.map{ (_, name , _) ->
     name
 }
 
-private val menuItemPrices = menuData.associate { menuEntry ->
-    val (_, name, price) = menuEntry.split(",")
+private val menuItemPrices = menuData.associate { (_, name, price) ->
     name to price.toDouble()
 }
 
-private val menuItemTypes = menuData.associate { menuEntry ->
-    val (type, name, _) = menuEntry.split(",")
+private val menuItemTypes = menuData.associate { (type, name, _) ->
     name to type
 }
 
@@ -42,11 +41,21 @@ fun visitTavern() {
     narrate("$heroName sees several patrons in the tavern:")
     narrate(patrons.joinToString())
 
+    val itemOfTheDay = patrons.flatMap{getFavoriteMenuItems(it) }.random()
+    println("Item of the day: $itemOfTheDay")
+
     repeat(3){
         placeOrder(patrons.random(), menuItems.random(), patronGold)
     }
 
     displayPatronBalances(patronGold)
+}
+
+private fun getFavoriteMenuItems(patron: String): List<String> {
+    return when(patron) {
+        "Alex Ironfoot" -> menuItems.filter { menuItem -> menuItemTypes[menuItem]?.contains("dessert") == true }
+        else -> menuItems.shuffled().take(Random.nextInt(1..2))
+    }
 }
 
 private fun placeOrder(patronName: String,
