@@ -1,4 +1,5 @@
-import java.lang.reflect.Modifier
+package com.bignerdranch.nyethack
+
 import kotlin.random.Random
 import kotlin.random.nextInt
 
@@ -6,7 +7,7 @@ var narrationModifier: (String) -> String = {it}
 
 inline fun narrate(
     message: String,
-    modifier: (String) -> String = {narrationModifier(it)}
+    modifier: (String) -> String = { narrationModifier(it) }
 ) {
 
     println(modifier(message))
