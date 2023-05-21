@@ -1,7 +1,12 @@
 package com.bignerdranch.nyethack
 
-class Player {
-    var name = "madrigal"
+class Player(
+    initialName: String,
+    val homeTown: String,
+    var healthPoints: Int,
+    val isImmortal: Boolean
+) {
+    var name = initialName
         get() = field.replaceFirstChar { it.uppercase() }
         private set(value) {
             field = value.trim()
@@ -14,6 +19,16 @@ class Player {
             name.count {it.lowercase() in "aeiou"} > 4 -> "The Master of Vowels"
             else -> "The Renowned Hero"
         }
+    constructor(name: String, homeTown: String) : this(
+        initialName = name,
+        homeTown = homeTown,
+        healthPoints = 100,
+        isImmortal = false
+    ){
+        if(name.equals("Jason", ignoreCase = true)){
+            healthPoints = 500
+        }
+    }
     fun castFireball(numFireballs: Int = 2){
         narrate("A glass of Fireball springs into existence (x$numFireballs)")
     }
