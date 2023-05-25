@@ -1,10 +1,13 @@
 package com.bignerdranch.nyethack
 
-val player = Player("Jason")
+lateinit var player: Player
 
 fun main() {
-
+    narrate("Welcome to NyetHack!")
+    val playerName = promptHeroName()
+    player = Player(playerName)
     //changeNarratorMood()
+    player.prophesize()
 
     val mortality = if(player.isImmortal) "an immortal" else "a mortal"
 
@@ -13,6 +16,7 @@ fun main() {
 
     visitTavern()
     player.castFireball()
+    player.prophesize()
 }
 
 private fun promptHeroName(): String {
