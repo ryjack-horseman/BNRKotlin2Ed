@@ -2,7 +2,7 @@ package com.bignerdranch.nyethack
 
 class Player(
     initialName: String,
-    val homeTown: String,
+    val homeTown: String = "Neversummer",
     var healthPoints: Int,
     val isImmortal: Boolean
 ) {
@@ -19,9 +19,14 @@ class Player(
             name.count {it.lowercase() in "aeiou"} > 4 -> "The Master of Vowels"
             else -> "The Renowned Hero"
         }
-    constructor(name: String, homeTown: String) : this(
+
+    init {
+        require(healthPoints > 0) {"Healthpoints must be greateer than zero"}
+        require(name.isNotBlank()){"Player must have a name"}
+    }
+
+    constructor(name: String) : this(
         initialName = name,
-        homeTown = homeTown,
         healthPoints = 100,
         isImmortal = false
     ){
