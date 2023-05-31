@@ -9,7 +9,7 @@ fun main() {
     //changeNarratorMood()
     player.prophesize()
 
-    var currentRoom = TownSquare()
+    var currentRoom = Tavern()
 
     val mortality = if(player.isImmortal) "an immortal" else "a mortal"
 
