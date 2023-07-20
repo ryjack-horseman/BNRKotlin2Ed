@@ -1,16 +1,19 @@
 package com.bignerdranch.nyethack
 
+import kotlin.random.Random
+
 class Player(
     initialName: String,
     val homeTown: String = "Neversummer",
-    var healthPoints: Int,
+    override var healthPoints: Int,
     val isImmortal: Boolean
-) {
-    var name = initialName
+) : Fightable {
+    override var name = initialName
         get() = field.replaceFirstChar { it.uppercase() }
         private set(value) {
             field = value.trim()
         }
+
 
     val title: String
         get() = when {
@@ -31,6 +34,9 @@ class Player(
             "best the world-eater"
         ).random()
     }
+
+    override val diceCount = 3
+    override val diceSides = 4
 
     init {
         require(healthPoints > 0) {"Healthpoints must be greater than zero"}
@@ -58,5 +64,10 @@ class Player(
     fun prophesize() {
         narrate("$name thinks about their future.")
         narrate("A fortune teller told $name, \"$prophecy\"")
+    }
+    override fun takeDamage(damage: Int) {
+        if(!isImmortal){
+            healthPoints -= damage
+        }
     }
 }
